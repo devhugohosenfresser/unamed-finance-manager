@@ -1,0 +1,44 @@
+:root {
+     --body-bg: #1f1b28;
+     --widget-bg: #2a2435;
+     --widget-border: 3px solid #3a2f4a;
+     --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+     --font-color: #ffffff;
+}
+
+body {
+     background-color: var(--body-bg);
+}
+
+*::-webkit-scrollbar {
+     display: none; /* Chrome, Safari, Opera */
+}
+
+* {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+     font-family: var(--font-family);
+     color: var(--font-color);
+     -ms-overflow-style: none; /* IE and Edge */
+     scrollbar-width: none; /* Firefox */
+}
+
+li {
+     list-style: none;
+}
+
+.Widget {
+     background-color: var(--widget-bg);
+     border: var(--widget-border);
+     border-radius: 10px;
+     padding: 0 20px 20px 20px;
+     width: fit-content;
+     height: fit-content;
+
+     .WidgetTitle {
+          font-size: larger;
+          margin-top: 10px;
+          margin-bottom: 10px;
+     }
+}
