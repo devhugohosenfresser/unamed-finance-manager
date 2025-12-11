@@ -1,9 +1,12 @@
 :root {
-     --body-bg: #1f1b28;
-     --widget-bg: #2a2435;
-     --widget-border: 3px solid #3a2f4a;
+     --body-bg: #10101a;
+     --widget-bg: #1a1a2b;
+     --widget-border: 3px solid #2b2a45;
      --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-     --font-color: #ffffff;
+     --font-color: #dcdcff;
+     --link-color: #5faaff;
+     --sidebar-bg: #151525;
+     --sidebar-border: 4px solid #232338;
 }
 
 body {
@@ -28,6 +31,16 @@ li {
      list-style: none;
 }
 
+a {
+     text-decoration: none;
+     color: var(--link-color);
+}
+
+.WidgetGrid {
+     margin: 20px;
+     display: grid;
+}
+
 .Widget {
      background-color: var(--widget-bg);
      border: var(--widget-border);
@@ -35,10 +48,14 @@ li {
      padding: 0 20px 20px 20px;
      width: fit-content;
      height: fit-content;
+}
 
-     .WidgetTitle {
-          font-size: larger;
-          margin-top: 10px;
-          margin-bottom: 10px;
-     }
+.Widget .WidgetTitle {
+     font-size: larger;
+     margin-top: 10px;
+     margin-bottom: 10px;
+}
+
+.Widget .WidgetFooter {
+     margin-top: 10px;
 }

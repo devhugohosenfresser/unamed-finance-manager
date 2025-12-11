@@ -1,36 +1,53 @@
 <script setup lang="ts">
-const { data: userCount } = await useFetch('/api/get-count/users', {
+const { data: userCount } = await useFetch('/api/get/get-count/users', {
      server: true,
 });
 const { data: transactionsCount } = await useFetch(
-     '/api/get-count/transactions',
+     '/api/get/get-count/transactions',
      { server: true }
 );
-const { data: subscriptionsCount } = await useFetch(
-     '/api/get-count/subscriptions',
-     { server: true }
-);
-const { data: LogsCount } = await useFetch('/api/get-count/logs', {
+const { data: LogsCount } = await useFetch('/api/get/get-count/logs', {
      server: true,
 });
+const { data: FinancialAccountsCount } = await useFetch(
+     '/api/get/get-count/financial-accounts',
+     { server: true }
+);
 </script>
 
 <template>
-     <ul class="Widget">
-          <li class="WidgetTitle">
-               <strong>Overview</strong>
-          </li>
-          <li>
-               Total Users: <strong>{{ userCount }}</strong>
-          </li>
-          <li>
-               Total Transactions: <strong>{{ transactionsCount }}</strong>
-          </li>
-          <li>
-               Total Subcriptions: <strong>{{ subscriptionsCount }}</strong>
-          </li>
-          <li>
-               Total Logs: <strong>{{ LogsCount }}</strong>
-          </li>
-     </ul>
+     <div class="WidgetGrid">
+          <ul class="Widget">
+               <li class="WidgetTitle">
+                    <strong>Overview</strong>
+               </li>
+               <li>
+                    Total
+                    <NuxtLink to="/admin/panels/UserPanel">Users</NuxtLink>:
+                    {{ userCount }}
+               </li>
+               <li>
+                    Total
+                    <NuxtLink to="/admin/panels/LogsPanel"
+                         >Financial Accounts</NuxtLink
+                    >:
+                    {{ FinancialAccountsCount }}
+               </li>
+               <li>
+                    Total
+                    <NuxtLink to="/admin/panels/TransactionPanel">
+                         Transactions </NuxtLink
+                    >:
+                    {{ transactionsCount }}
+               </li>
+               <li>
+                    Total
+                    <NuxtLink to="/admin/panels/LogsPanel">Logs</NuxtLink>:
+                    {{ LogsCount }}
+               </li>
+               <li class="WidgetFooter">
+                    <NuxtLink to="/admin/panels">Panel Overview</NuxtLink>
+               </li>
+          </ul>
+     </div>
 </template>
