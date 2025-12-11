@@ -69,6 +69,13 @@
                          </ul>
                     </details>
                </li>
+               <li>
+                    <form action="/api/auth/logout" method="POST">
+                         <button type="submit" class="LinkButton">
+                              Logout
+                         </button>
+                    </form>
+               </li>
           </ul>
      </nav>
 </template>

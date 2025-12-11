@@ -11,9 +11,9 @@ import { relations } from 'drizzle-orm';
 // USERS
 export const users = pgTable('Users', {
      id: serial('id').primaryKey(),
-     googleId: varchar('google_id', { length: 255 }).notNull().unique(),
-     email: varchar('email', { length: 64 }).notNull(),
-     username: varchar('username', { length: 64 }).notNull(),
+     email: varchar('email', { length: 64 }).notNull().unique(),
+     username: varchar('username', { length: 64 }).notNull().unique(),
+     password: varchar('password', { length: 64 }).notNull(),
      role: varchar('role', { length: 16 }).notNull(),
      createdAt: timestamp('created_at').defaultNow().notNull(),
 });
