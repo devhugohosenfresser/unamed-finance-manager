@@ -32,7 +32,7 @@ export default defineEventHandler((event) => {
                !signature ||
                sign(`${userId}.${userLevel}`) !== signature
           ) {
-               throw new Error('Invalid session');
+               return sendRedirect(event, '/auth/login', 302);
           }
 
           // Attach user info to context

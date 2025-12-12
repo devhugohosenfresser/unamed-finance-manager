@@ -1,7 +1,7 @@
 <template>
-     <div class="WidgetGrid">
-          <ul class="Widget">
-               <li class="WidgetTitle">
+     <div>
+          <ul>
+               <li>
                     <strong>Panel Overview</strong>
                </li>
                <li>

@@ -1,4 +1,3 @@
-// TODO: Add Admin Auth to this API.
 import { db } from '../../../database/client';
 import { users } from '../../../database/schema';
 import { eq } from 'drizzle-orm';

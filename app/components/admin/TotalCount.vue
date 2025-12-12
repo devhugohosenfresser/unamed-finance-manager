@@ -1,24 +1,24 @@
 <script setup lang="ts">
-const { data: userCount } = await useFetch('/api/get/get-count/users', {
+const { data: userCount } = await useFetch('/api/get/admin/get-count/users', {
      server: true,
 });
 const { data: transactionsCount } = await useFetch(
-     '/api/get/get-count/transactions',
+     '/api/get/admin/get-count/transactions',
      { server: true }
 );
-const { data: LogsCount } = await useFetch('/api/get/get-count/logs', {
+const { data: LogsCount } = await useFetch('/api/get/admin/get-count/logs', {
      server: true,
 });
 const { data: FinancialAccountsCount } = await useFetch(
-     '/api/get/get-count/financial-accounts',
+     '/api/get/admin/get-count/financial-accounts',
      { server: true }
 );
 </script>
 
 <template>
-     <div class="WidgetGrid">
-          <ul class="Widget">
-               <li class="WidgetTitle">
+     <div>
+          <ul>
+               <li>
                     <strong>Overview</strong>
                </li>
                <li>
@@ -45,7 +45,7 @@ const { data: FinancialAccountsCount } = await useFetch(
                     <NuxtLink to="/admin/panels/LogsPanel">Logs</NuxtLink>:
                     {{ LogsCount }}
                </li>
-               <li class="WidgetFooter">
+               <li>
                     <NuxtLink to="/admin/panels">Panel Overview</NuxtLink>
                </li>
           </ul>

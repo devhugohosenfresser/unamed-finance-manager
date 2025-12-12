@@ -6,7 +6,7 @@
                <li>
                     <!-- User Menu -->
                     <details>
-                         <summary class="menu-title">User</summary>
+                         <summary>User</summary>
 
                          <ul>
                               <li>
@@ -18,7 +18,7 @@
                     </details>
                     <!-- Admin Menu -->
                     <details>
-                         <summary class="menu-title">Admin</summary>
+                         <summary>Admin</summary>
 
                          <ul>
                               <li>
@@ -28,16 +28,9 @@
                               </li>
 
                               <!-- Panel Dashboard -->
-                              <li class="dropdown-link">
+                              <li>
                                    <details>
-                                        <summary class="link-row">
-                                             <span
-                                                  ><NuxtLink to="/admin/panels"
-                                                       >Panel
-                                                       Dashboard</NuxtLink
-                                                  ></span
-                                             >
-                                        </summary>
+                                        <summary>Panels</summary>
 
                                         <ul>
                                              <li>
