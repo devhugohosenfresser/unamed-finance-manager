@@ -1,0 +1,40 @@
+.sidepanel-nav {
+     background-color: var(--sidebar-bg);
+     padding: 1rem;
+}
+
+.sidepanel-nav ul {
+     padding-left: 0.5rem;
+}
+
+summary {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     user-select: none;
+}
+
+.link-row {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+}
+
+details summary::-webkit-details-marker {
+     display: none; /* hide default marker */
+}
+
+details > summary::after {
+     content: '▶';
+     font-size: 0.8rem;
+     margin-left: 0.5rem;
+     transition: transform 0.2s;
+}
+
+details[open] > summary::after {
+     transform: rotate(90deg);
+}
+
+.sidepanel-nav ul ul {
+     padding-left: 1rem;
+}

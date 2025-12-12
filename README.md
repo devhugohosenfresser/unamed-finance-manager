@@ -1,75 +1,122 @@
-# Nuxt Minimal Starter
+# Finance Manager
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+A modern web application for personal finance management. Track expenses, manage budgets, and gain insights into your spending habits.
 
-## Setup
+## Features
 
-Make sure to install dependencies:
+-   Expense tracking and categorization
+-   Budget management
+-   Transaction history
+-   Financial insights and analytics
+-   User authentication
+-   Responsive design for all devices
+
+## Technologies
+
+-   Frontend: Nuxt.js 3, Vue 3, TypeScript
+-   Styling: CSS
+-   Backend: Node.js, Express
+-   Database: PostgreSQL
+
+## Prerequisites
+
+-   Node.js 18.0.0 or higher
+-   npm, pnpm, yarn, or bun package manager
+-   PostgreSQL 12 or higher
+
+## Installation
+
+1. Clone the repository:
+
+    ```bash
+    git clone https://github.com/yourusername/finance-manager.git
+    cd finance-manager
+    ```
+
+2. Install dependencies:
+
+    ```bash
+    npm install
+    # or
+    pnpm install
+    # or
+    yarn install
+    # or
+    bun install
+    ```
+
+3. Set up environment variables:
+
+    - Copy `.env.example` to `.env`
+    - Update the environment variables with your configuration
+
+4. Set up the database:
+    - Create a new PostgreSQL database
+    - Update the database connection string in `.env`
+    - Run database migrations
+
+## Development
+
+Start the development server:
 
 ```bash
-# npm
-npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
 npm run dev
-
-# pnpm
+# or
 pnpm dev
-
-# yarn
+# or
 yarn dev
-
-# bun
+# or
 bun run dev
 ```
 
-## Production
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-Build the application for production:
+## Building for Production
+
+To create a production build:
 
 ```bash
-# npm
 npm run build
-
-# pnpm
+# or
 pnpm build
-
-# yarn
+# or
 yarn build
-
-# bun
+# or
 bun run build
 ```
 
-Locally preview production build:
+To preview the production build locally:
 
 ```bash
-# npm
 npm run preview
-
-# pnpm
+# or
 pnpm preview
-
-# yarn
+# or
 yarn preview
-
-# bun
+# or
 bun run preview
 ```
+
+## Testing
+
+Run unit tests:
+
+```bash
+npm test
+# or
+pnpm test
+# or
+yarn test
+# or
+bun test
+```
+
+## Contributing
+
+Contributions are welcome. Please open an issue first to discuss what you would like to change.
+
+## License
+
+[MIT](LICENSE)
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.

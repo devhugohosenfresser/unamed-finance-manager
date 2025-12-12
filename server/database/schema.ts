@@ -4,27 +4,29 @@ import {
      varchar,
      integer,
      decimal,
+     timestamp,
 } from 'drizzle-orm/pg-core';
 import { relations } from 'drizzle-orm';
 
 // USERS
 export const users = pgTable('Users', {
      id: serial('id').primaryKey(),
-     email: varchar('email', { length: 64 }).notNull(),
-     username: varchar('username', { length: 64 }).notNull(),
+     email: varchar('email', { length: 64 }).notNull().unique(),
+     username: varchar('username', { length: 64 }).notNull().unique(),
      password: varchar('password', { length: 64 }).notNull(),
-     role: varchar('type', { length: 16 }).notNull(),
+     role: varchar('role', { length: 16 }).notNull(),
+     status: varchar('status', { length: 32 }).notNull().default('pending'),
+     createdAt: timestamp('created_at').defaultNow().notNull(),
 });
 
 // ACCOUNTS
-export const accounts = pgTable('Accounts', {
+export const FinancialAccounts = pgTable('FinancialAccounts', {
      id: serial('id').primaryKey(),
      userId: integer('user_id')
           .notNull()
           .references(() => users.id),
      name: varchar('name', { length: 64 }).notNull(),
-     value: decimal('value').notNull(),
-     spendingGoal: decimal('spending_goal'),
+     createdAt: timestamp('created_at').defaultNow().notNull(),
 });
 
 // TRANSACTIONS
@@ -33,24 +35,15 @@ export const transactions = pgTable('Transactions', {
      userId: integer('user_id')
           .notNull()
           .references(() => users.id),
-     accountId: integer('account_id')
+     FinancialAccountId: integer('account_id')
           .notNull()
-          .references(() => accounts.id),
+          .references(() => FinancialAccounts.id),
+     name: varchar('name', { length: 64 }).notNull(),
      type: varchar('type', { length: 16 }).notNull(),
+     month: varchar('month', { length: 64 }).notNull(),
+     year: integer('year').notNull(),
      value: decimal('value').notNull(),
-});
-
-// SUBSCRIPTIONS
-export const subscriptions = pgTable('Subscriptions', {
-     id: serial('id').primaryKey(),
-     userId: integer('user_id')
-          .notNull()
-          .references(() => users.id),
-     accountId: integer('account_id')
-          .notNull()
-          .references(() => accounts.id),
-     frequency: varchar('frequency', { length: 16 }).notNull(),
-     value: decimal('value').notNull(),
+     createdAt: timestamp('created_at').defaultNow().notNull(),
 });
 
 // LOGS
@@ -59,52 +52,47 @@ export const logs = pgTable('Logs', {
      userId: integer('user_id')
           .notNull()
           .references(() => users.id),
+     transactionId: integer('transaction_id').references(() => transactions.id),
+     FinancialAccountId: integer('FinancialAccount_id').references(
+          () => FinancialAccounts.id
+     ),
      type: varchar('type', { length: 32 }).notNull(),
      note: varchar('note', { length: 255 }),
      value: decimal('value'),
+     createdAt: timestamp('created_at').defaultNow().notNull(),
 });
 
 /* --------------------------------- RELATIONS --------------------------------- */
 
 // User relations
 export const usersRelations = relations(users, ({ many }) => ({
-     accounts: many(accounts),
+     accounts: many(FinancialAccounts),
      transactions: many(transactions),
-     subscriptions: many(subscriptions),
      logs: many(logs),
 }));
 
-// Account relations
-export const accountsRelations = relations(accounts, ({ one, many }) => ({
-     user: one(users, {
-          fields: [accounts.userId],
-          references: [users.id],
-     }),
-     transactions: many(transactions),
-     subscriptions: many(subscriptions),
-}));
+// FinancialAccounts relations
+export const accountsRelations = relations(
+     FinancialAccounts,
+     ({ one, many }) => ({
+          user: one(users, {
+               fields: [FinancialAccounts.userId],
+               references: [users.id],
+          }),
+          transactions: many(transactions),
+          logs: many(logs),
+     })
+);
 
-// Transaction relations
+// Transactions relations
 export const transactionsRelations = relations(transactions, ({ one }) => ({
      user: one(users, {
           fields: [transactions.userId],
           references: [users.id],
      }),
-     account: one(accounts, {
-          fields: [transactions.accountId],
-          references: [accounts.id],
-     }),
-}));
-
-// Subscription relations
-export const subscriptionsRelations = relations(subscriptions, ({ one }) => ({
-     user: one(users, {
-          fields: [subscriptions.userId],
-          references: [users.id],
-     }),
-     account: one(accounts, {
-          fields: [subscriptions.accountId],
-          references: [accounts.id],
+     account: one(FinancialAccounts, {
+          fields: [transactions.FinancialAccountId],
+          references: [FinancialAccounts.id],
      }),
 }));
 
@@ -113,5 +101,13 @@ export const logsRelations = relations(logs, ({ one }) => ({
      user: one(users, {
           fields: [logs.userId],
           references: [users.id],
+     }),
+     transaction: one(transactions, {
+          fields: [logs.transactionId],
+          references: [transactions.id],
+     }),
+     account: one(FinancialAccounts, {
+          fields: [logs.FinancialAccountId],
+          references: [FinancialAccounts.id],
      }),
 }));
