@@ -1,8 +1,10 @@
-import { getCookie } from 'h3';
+import { getCookie, setCookie, sendRedirect, createError } from 'h3';
 import { sign } from '../utils/sign';
 
 export default defineEventHandler((event) => {
-     const path = event.req.url || '';
+     const url = new URL(event.req.url || '', 'http://localhost');
+     const path = url.pathname;
+
      const excludedPaths = [
           '/api/auth/login',
           '/api/auth/register',
@@ -10,12 +12,20 @@ export default defineEventHandler((event) => {
           '/auth/register',
      ];
 
-     // Skip all excluded Paths routes
+     const AdminPaths = [
+          '/admin/dashboard',
+          '/admin/panels/UsersPanel',
+          '/admin/panels/FinancialAccountsPanel',
+          '/admin/panels/TransactionsPanel',
+     ];
+
      if (excludedPaths.includes(path)) return;
 
      const sessionCookie = getCookie(event, 'session');
+     const isApi = path.startsWith('/api/');
+
      if (!sessionCookie) {
-          if (path.startsWith('/api/')) {
+          if (isApi) {
                throw createError({
                     statusCode: 401,
                     statusMessage: 'Unauthorized',
@@ -26,22 +36,39 @@ export default defineEventHandler((event) => {
 
      try {
           const [userId, userLevel, signature] = sessionCookie.split('.');
+          const validLevels = ['admin', 'user'];
+
           if (
                !userId ||
                !userLevel ||
                !signature ||
-               sign(`${userId}.${userLevel}`) !== signature
+               !validLevels.includes(userLevel)
           ) {
-               return sendRedirect(event, '/auth/login', 302);
+               throw new Error('Invalid session format');
+          }
+
+          if (sign(`${userId}.${userLevel}`) !== signature) {
+               throw new Error('Invalid signature');
           }
 
           // Attach user info to context
           event.context.userId = Number(userId);
           event.context.userLevel = userLevel;
+
+          // Check admin-only paths
+          if (AdminPaths.includes(path) && userLevel !== 'admin') {
+               if (isApi) {
+                    throw createError({
+                         statusCode: 403,
+                         statusMessage: 'Forbidden: admin access required',
+                    });
+               }
+               return sendRedirect(event, '/auth/login', 302);
+          }
      } catch (error) {
-          // Clear invalid session cookie
           setCookie(event, 'session', '', { maxAge: -1 });
-          if (path.startsWith('/api/')) {
+
+          if (isApi) {
                throw createError({
                     statusCode: 401,
                     statusMessage: 'Invalid session',

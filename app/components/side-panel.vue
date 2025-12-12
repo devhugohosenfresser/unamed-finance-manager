@@ -1,13 +1,12 @@
 <template>
      <nav class="sidepanel-nav">
-          <h3>Unamed Finance Manager</h3>
+          <h3>Unnamed Finance Manager</h3>
 
           <ul>
                <li>
                     <!-- User Menu -->
                     <details>
                          <summary>User</summary>
-
                          <ul>
                               <li>
                                    <NuxtLink to="/user/dashboard"
@@ -16,10 +15,10 @@
                               </li>
                          </ul>
                     </details>
-                    <!-- Admin Menu -->
-                    <details>
-                         <summary>Admin</summary>
 
+                    <!-- Admin Menu -->
+                    <details v-if="UserLevel === 'admin'">
+                         <summary>Admin</summary>
                          <ul>
                               <li>
                                    <NuxtLink to="/admin/dashboard"
@@ -31,14 +30,12 @@
                               <li>
                                    <details>
                                         <summary>Panels</summary>
-
                                         <ul>
                                              <li>
                                                   <NuxtLink
                                                        to="/admin/panels/UsersPanel"
+                                                       >Users Panel</NuxtLink
                                                   >
-                                                       Users Panel
-                                                  </NuxtLink>
                                              </li>
                                              <li>
                                                   <NuxtLink
@@ -60,6 +57,7 @@
                          </ul>
                     </details>
                </li>
+
                <li>
                     <form action="/api/auth/logout" method="POST">
                          <button type="submit" class="LinkButton">
@@ -70,4 +68,5 @@
           </ul>
      </nav>
 </template>
+
 <style src="@/assets/CSS/components/side-panel.css" scoped></style>
