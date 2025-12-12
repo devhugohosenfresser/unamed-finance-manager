@@ -3,7 +3,17 @@ import { FinancialAccounts } from '../../database/schema';
 
 export default defineEventHandler(async (event) => {
      const body = await readBody(event);
-     const { UserId, name } = body;
+
+     let UserId;
+     let name = body.name;
+
+     if (event.context.userLevel !== 'admin') {
+          // Non-admin users must use their own ID
+          UserId = event.context.userId;
+     } else {
+          // Admins can supply any user ID in body
+          UserId = body.UserId;
+     }
 
      // Validate input
      if (!UserId || !name?.trim()) {

@@ -4,7 +4,17 @@ import { eq, and } from 'drizzle-orm';
 
 export default defineEventHandler(async (event) => {
      const body = await readBody(event);
-     const { AccountId, UserId } = body;
+
+     let UserId;
+     let AccountId = body.AccountId;
+
+     if (event.context.userLevel !== 'admin') {
+          // Non-admin: must use their own userId
+          UserId = event.context.userId;
+     } else {
+          // Admin: can supply any userId
+          UserId = body.UserId;
+     }
 
      // Validate input
      if (!UserId || !AccountId) {

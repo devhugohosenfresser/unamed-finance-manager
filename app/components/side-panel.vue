@@ -54,13 +54,6 @@
                                                        Transactions Panel
                                                   </NuxtLink>
                                              </li>
-                                             <li>
-                                                  <NuxtLink
-                                                       to="/admin/panels/LogsPanel"
-                                                  >
-                                                       Logs Panel
-                                                  </NuxtLink>
-                                             </li>
                                         </ul>
                                    </details>
                               </li>

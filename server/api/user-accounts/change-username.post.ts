@@ -4,27 +4,41 @@ import { eq } from 'drizzle-orm';
 
 export default defineEventHandler(async (event) => {
      const body = await readBody(event);
-     const { UserId, NewUsername } = body;
+     const { UserId: bodyUserId, NewUsername } = body;
 
-     if (!UserId || !NewUsername) {
+     if (!NewUsername?.trim()) {
+          throw createError({
+               statusCode: 400,
+               statusMessage: 'New username is required.',
+          });
+     }
+
+     const isAdmin = event.context.userLevel === 'admin';
+
+     // Determine which UserId to use
+     const UserId = isAdmin ? bodyUserId : event.context.userId;
+
+     if (!UserId) {
           throw createError({
                statusCode: 400,
                statusMessage: 'UserId is required.',
           });
      }
 
+     // Check if the user exists and is accessible
      const user = await db.select().from(users).where(eq(users.id, UserId));
 
      if (user.length === 0) {
           throw createError({
                statusCode: 404,
-               statusMessage: 'User not found.',
+               statusMessage: 'User not found or access denied.',
           });
      }
 
+     // Update username
      const updatedUser = await db
           .update(users)
-          .set({ username: NewUsername })
+          .set({ username: NewUsername.trim() })
           .where(eq(users.id, UserId))
           .returning();
 

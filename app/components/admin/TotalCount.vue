@@ -6,9 +6,6 @@ const { data: transactionsCount } = await useFetch(
      '/api/transactions/get-count',
      { server: true }
 );
-const { data: LogsCount } = await useFetch('/api/logs/get-count', {
-     server: true,
-});
 const { data: FinancialAccountsCount } = await useFetch(
      '/api/financial-accounts/get-count',
      { server: true }
@@ -39,11 +36,6 @@ const { data: FinancialAccountsCount } = await useFetch(
                          Transactions</NuxtLink
                     >:
                     {{ transactionsCount }}
-               </li>
-               <li>
-                    Total
-                    <NuxtLink to="/admin/panels/LogsPanel">Logs</NuxtLink>:
-                    {{ LogsCount }}
                </li>
                <li>
                     <NuxtLink to="/admin/panels">Panel Overview</NuxtLink>

@@ -3,6 +3,14 @@ import { users } from '../../database/schema';
 import { eq } from 'drizzle-orm';
 
 export default defineEventHandler(async (event) => {
+     // Ensure only admins can access
+     if (event.context.userLevel !== 'admin') {
+          throw createError({
+               statusCode: 403,
+               statusMessage: 'Forbidden: admin access required.',
+          });
+     }
+
      const body = await readBody(event);
      const { UserId } = body;
 
@@ -13,6 +21,7 @@ export default defineEventHandler(async (event) => {
           });
      }
 
+     // Check if user exists
      const user = await db.select().from(users).where(eq(users.id, UserId));
 
      if (user.length === 0) {
@@ -24,11 +33,12 @@ export default defineEventHandler(async (event) => {
 
      if (user[0].status === 'active') {
           throw createError({
-               statusCode: 404,
-               statusMessage: 'Account is already active',
+               statusCode: 400,
+               statusMessage: 'Account is already active.',
           });
      }
 
+     // Activate user
      const updatedUser = await db
           .update(users)
           .set({ status: 'active' })
