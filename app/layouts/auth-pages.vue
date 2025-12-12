@@ -10,13 +10,4 @@
      </div>
 </template>
 
-<style scoped>
-.app-layout {
-     display: flex;
-     min-height: 100vh;
-}
-
-.PageWrapper {
-     padding: 20px;
-}
-</style>
+<style scoped src="@/assets/css/layouts/auth-pages.css"></style>

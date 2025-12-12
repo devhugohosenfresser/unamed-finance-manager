@@ -29,4 +29,4 @@ const { data: FinancialAccounts } = await useFetch(
      </ul>
 </template>
 
-<style src="@/assets/CSS/admin/panels/panel.css" scoped></style>
+<style src="@/assets/CSS/pages/admin/panels/panel.css" scoped></style>

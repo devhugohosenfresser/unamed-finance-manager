@@ -14,23 +14,4 @@ defineProps<{
      </div>
 </template>
 
-<style scoped>
-.header {
-     display: flex;
-     align-items: center;
-     justify-content: space-between;
-     padding: 0.5rem;
-     background-color: var(--widget-bg);
-     color: var(--font-color);
-}
-
-.sidebar-toggle {
-     background-color: var(--sidebar-bg);
-     color: var(--link-color);
-     border: none;
-     font-size: 1.3rem;
-     cursor: pointer;
-     padding: 0.5rem 1rem;
-     border-radius: 5px;
-}
-</style>
+<style src="@/assets/CSS/components/header.css" scoped></style>

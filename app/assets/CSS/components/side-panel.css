@@ -1,0 +1,44 @@
+.sidepanel-nav {
+     color: var(--font-color);
+     background-color: var(--sidebar-bg);
+     padding: 1rem;
+     font-family: var(--font-family);
+}
+
+.sidepanel-nav ul {
+     list-style: none;
+     padding-left: 0.5rem;
+}
+
+summary {
+     cursor: pointer;
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     user-select: none;
+}
+
+.link-row {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+}
+
+details summary::-webkit-details-marker {
+     display: none; /* hide default marker */
+}
+
+details > summary::after {
+     content: '▶';
+     font-size: 0.8rem;
+     margin-left: 0.5rem;
+     transition: transform 0.2s;
+}
+
+details[open] > summary::after {
+     transform: rotate(90deg);
+}
+
+.sidepanel-nav ul ul {
+     padding-left: 1rem;
+}

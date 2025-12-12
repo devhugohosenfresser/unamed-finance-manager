@@ -41,4 +41,4 @@ const { data: Transactions } = await useFetch('/api/get/get-all/transactions', {
      </ul>
 </template>
 
-<style src="@/assets/CSS/admin/panels/panel.css" scoped></style>
+<style src="@/assets/CSS/pages/admin/panels/panel.css" scoped></style>
