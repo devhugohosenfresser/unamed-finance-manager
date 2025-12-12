@@ -36,7 +36,7 @@ const { data: FinancialAccountsCount } = await useFetch(
                <li>
                     Total
                     <NuxtLink to="/admin/panels/TransactionPanel">
-                         Transactions </NuxtLink
+                         Transactions</NuxtLink
                     >:
                     {{ transactionsCount }}
                </li>

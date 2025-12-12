@@ -31,7 +31,12 @@
                               <li class="dropdown-link">
                                    <details>
                                         <summary class="link-row">
-                                             <span>Panel Dashboard</span>
+                                             <span
+                                                  ><NuxtLink to="/admin/panels"
+                                                       >Panel
+                                                       Dashboard</NuxtLink
+                                                  ></span
+                                             >
                                         </summary>
 
                                         <ul>

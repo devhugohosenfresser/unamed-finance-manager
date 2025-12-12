@@ -15,12 +15,29 @@ export default defineEventHandler(async (event) => {
           });
      }
 
-     const user = await db.select().from(users).where(eq(users.email, email));
+     // Fetch user from DB
+     async function getUserByEmail(email: string) {
+          try {
+               const user = await db
+                    .select()
+                    .from(users)
+                    .where(eq(users.email, email));
+               return user;
+          } catch (error) {
+               throw createError({
+                    statusCode: 501,
+                    statusMessage:
+                         'Login query broke, please try again later. Thank you for your understanding.',
+               });
+          }
+     }
 
-     if (user.length === 0) {
+     const user = await getUserByEmail(email);
+
+     if (!user || user.length === 0) {
           throw createError({
                statusCode: 401,
-               statusMessage: 'No Account with that email is registered.',
+               statusMessage: 'No account with that email is registered.',
           });
      }
 
@@ -29,7 +46,17 @@ export default defineEventHandler(async (event) => {
      if (!isPasswordValid) {
           throw createError({
                statusCode: 401,
-               statusMessage: 'The Entered password is incorrect.',
+               statusMessage: 'The entered password is incorrect.',
+          });
+     }
+
+     const isAccountActive = user[0].status === 'active';
+
+     if (!isAccountActive) {
+          throw createError({
+               statusCode: 403,
+               statusMessage:
+                    'Account is not active. Please wait until your account has been verified.',
           });
      }
 
