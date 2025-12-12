@@ -1,12 +1,12 @@
-import { db } from '../../../database/client';
-import { users } from '../../../database/schema';
+import { db } from '../../database/client';
+import { users } from '../../database/schema';
 import { eq } from 'drizzle-orm';
 
 export default defineEventHandler(async (event) => {
      const body = await readBody(event);
-     const { UserId } = body;
+     const { UserId, NewEmail } = body;
 
-     if (!UserId) {
+     if (!UserId || !NewEmail) {
           throw createError({
                statusCode: 400,
                statusMessage: 'UserId is required.',
@@ -22,16 +22,9 @@ export default defineEventHandler(async (event) => {
           });
      }
 
-     if (user[0].status === 'deactivated') {
-          throw createError({
-               statusCode: 404,
-               statusMessage: 'Account is already deactivated',
-          });
-     }
-
      const updatedUser = await db
           .update(users)
-          .set({ status: 'deactivated' })
+          .set({ email: NewEmail })
           .where(eq(users.id, UserId))
           .returning();
 

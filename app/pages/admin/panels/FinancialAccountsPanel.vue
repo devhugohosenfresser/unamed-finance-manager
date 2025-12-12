@@ -105,7 +105,7 @@ const handleSubmit = (e: Event) => {
                     />
                     | Created: {{ formatDate(account.createdAt) }}
                     <button
-                         @click="deleteAccount(account.id)"
+                         @click="deleteAccount(account.id, account.userId)"
                          class="danger-button"
                     >
                          Delete

@@ -1,5 +1,5 @@
-import { db } from '../../../../database/client';
-import { users } from '../../../../database/schema';
+import { db } from '../../database/client';
+import { users } from '../../database/schema';
 import { asc } from 'drizzle-orm';
 
 export default defineEventHandler(async () => {

@@ -3,7 +3,7 @@ import { reactive, ref } from 'vue';
 
 export function useAdminUsers() {
      // Fetch users
-     const { data: Users, refresh } = useFetch('/api/get/admin/get-all/users', {
+     const { data: Users, refresh } = useFetch('/api/user-accounts/get-all', {
           server: true,
      });
 
@@ -63,7 +63,7 @@ export function useAdminUsers() {
      // Actions
      async function deactivate(id: number) {
           if (!confirm(`Deactivate Account ID: ${id}?`)) return;
-          await $fetch('/api/auth/user-management/deactivate-account', {
+          await $fetch('/api/user-accounts/deactivate', {
                method: 'POST',
                body: { UserId: id },
           });
@@ -72,7 +72,7 @@ export function useAdminUsers() {
 
      async function activate(id: number) {
           if (!confirm(`Activate Account ID: ${id}?`)) return;
-          await $fetch('/api/auth/user-management/activate-account', {
+          await $fetch('/api/user-accounts/activate', {
                method: 'POST',
                body: { UserId: id },
           });
@@ -82,7 +82,7 @@ export function useAdminUsers() {
      async function deleteAccount(id: number) {
           if (!confirm(`Delete Account ID: ${id}? This cannot be undone.`))
                return;
-          await $fetch('/api/auth/user-management/delete-account', {
+          await $fetch('/api/user-accounts/delete', {
                method: 'DELETE',
                body: { UserId: id },
           });
@@ -95,7 +95,7 @@ export function useAdminUsers() {
 
           if (!confirm(`Change username for Account ID: ${id}?`)) return;
 
-          await $fetch('/api/auth/user-management/change-username', {
+          await $fetch('/api/user-accounts/change-username', {
                method: 'POST',
                body: { UserId: id, NewUsername: newUsername },
           });
@@ -108,7 +108,7 @@ export function useAdminUsers() {
 
           if (!confirm(`Change email for Account ID: ${id}?`)) return;
 
-          await $fetch('/api/auth/user-management/change-email', {
+          await $fetch('/api/user-accounts/change-email', {
                method: 'POST',
                body: { UserId: id, NewEmail: newEmail },
           });

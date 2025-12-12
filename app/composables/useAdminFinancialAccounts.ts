@@ -16,7 +16,7 @@ interface CreateAccountParams {
 export function useAdminFinancialAccounts() {
      // State
      const { data: FinancialAccounts, refresh } = useFetch<FinancialAccount[]>(
-          '/api/get/admin/get-all/financial-accounts',
+          '/api/financial-accounts/get-all',
           { server: true }
      );
 
@@ -53,7 +53,7 @@ export function useAdminFinancialAccounts() {
           isLoading.value = true;
 
           try {
-               await $fetch('/api/create/financial-account', {
+               await $fetch('/api/financial-accounts/create', {
                     method: 'POST',
                     body: {
                          name,
@@ -77,8 +77,8 @@ export function useAdminFinancialAccounts() {
           if (!name) return alert('Please enter a valid account name');
 
           try {
-               await $fetch('/api/update/name/financial-account', {
-                    method: 'PATCH',
+               await $fetch('/api/financial-accounts/rename', {
+                    method: 'POST',
                     body: { id, name },
                });
                await refresh?.();
@@ -88,7 +88,7 @@ export function useAdminFinancialAccounts() {
           }
      };
 
-     const deleteAccount = async (id: number) => {
+     const deleteAccount = async (AccountId: number, UserId: number) => {
           if (
                !confirm(
                     'Are you sure you want to delete this account? This action cannot be undone.'
@@ -98,9 +98,9 @@ export function useAdminFinancialAccounts() {
           }
 
           try {
-               await $fetch('/api/delete/financial-account', {
+               await $fetch('/api/financial-accounts/delete', {
                     method: 'DELETE',
-                    body: { id },
+                    body: { AccountId, UserId },
                });
                await refresh?.();
           } catch (error: any) {

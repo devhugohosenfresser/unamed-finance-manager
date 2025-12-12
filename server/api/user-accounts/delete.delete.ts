@@ -1,12 +1,12 @@
-import { db } from '../../../database/client';
-import { users } from '../../../database/schema';
+import { db } from '../../database/client';
+import { users } from '../../database/schema';
 import { eq } from 'drizzle-orm';
 
 export default defineEventHandler(async (event) => {
      const body = await readBody(event);
-     const { UserId, NewEmail } = body;
+     const { UserId } = body;
 
-     if (!UserId || !NewEmail) {
+     if (!UserId) {
           throw createError({
                statusCode: 400,
                statusMessage: 'UserId is required.',
@@ -22,14 +22,10 @@ export default defineEventHandler(async (event) => {
           });
      }
 
-     const updatedUser = await db
-          .update(users)
-          .set({ email: NewEmail })
-          .where(eq(users.id, UserId))
-          .returning();
+     await db.delete(users).where(eq(users.id, UserId));
 
      return {
           success: true,
-          user: updatedUser[0],
+          message: 'User deleted successfully',
      };
 });

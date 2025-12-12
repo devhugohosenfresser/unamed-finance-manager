@@ -1,5 +1,5 @@
-import { db } from '../../../database/client';
-import { users } from '../../../database/schema';
+import { db } from '../../database/client';
+import { users } from '../../database/schema';
 import { eq } from 'drizzle-orm';
 
 export default defineEventHandler(async (event) => {
@@ -22,10 +22,21 @@ export default defineEventHandler(async (event) => {
           });
      }
 
-     await db.delete(users).where(eq(users.id, UserId));
+     if (user[0].status === 'deactivated') {
+          throw createError({
+               statusCode: 404,
+               statusMessage: 'Account is already deactivated',
+          });
+     }
+
+     const updatedUser = await db
+          .update(users)
+          .set({ status: 'deactivated' })
+          .where(eq(users.id, UserId))
+          .returning();
 
      return {
           success: true,
-          message: 'User deleted successfully',
+          user: updatedUser[0],
      };
 });

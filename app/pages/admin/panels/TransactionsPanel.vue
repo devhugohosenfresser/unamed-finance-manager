@@ -1,6 +1,18 @@
 <script setup lang="ts">
-const { data: Transactions } = await useFetch(
-     '/api/get/admin/get-all/transactions',
+interface Transaction {
+     id: number;
+     userId: number;
+     FinancialAccountId: number;
+     name: string;
+     type: string;
+     month: string;
+     year: number;
+     value: string;
+     createdAt: string;
+}
+
+const { data: Transactions } = await useFetch<Transaction[]>(
+     '/api/transactions/get-all',
      {
           server: true,
      }

@@ -1,5 +1,16 @@
 <script setup lang="ts">
-const { data: Logs } = await useFetch('/api/get/admin/get-all/logs', {
+interface Log {
+     id: number;
+     userId: number;
+     transactionId: number | null;
+     FinancialAccountId: number | null;
+     type: string;
+     note: string | null;
+     value: string | null;
+     createdAt: string;
+}
+
+const { data: Logs } = await useFetch<Log[]>('/api/logs/get-all', {
      server: true,
 });
 </script>

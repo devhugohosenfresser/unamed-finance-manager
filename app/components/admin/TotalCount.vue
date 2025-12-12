@@ -1,16 +1,16 @@
 <script setup lang="ts">
-const { data: userCount } = await useFetch('/api/get/admin/get-count/users', {
+const { data: userCount } = await useFetch('/api/user-accounts/get-count', {
      server: true,
 });
 const { data: transactionsCount } = await useFetch(
-     '/api/get/admin/get-count/transactions',
+     '/api/transactions/get-count',
      { server: true }
 );
-const { data: LogsCount } = await useFetch('/api/get/admin/get-count/logs', {
+const { data: LogsCount } = await useFetch('/api/logs/get-count', {
      server: true,
 });
 const { data: FinancialAccountsCount } = await useFetch(
-     '/api/get/admin/get-count/financial-accounts',
+     '/api/financial-accounts/get-count',
      { server: true }
 );
 </script>
