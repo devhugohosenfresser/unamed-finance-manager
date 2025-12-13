@@ -17,7 +17,7 @@
                     </details>
 
                     <!-- Admin Menu -->
-                    <details v-if="UserLevel === 'admin'">
+                    <details>
                          <summary>Admin</summary>
                          <ul>
                               <li>

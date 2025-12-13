@@ -33,16 +33,20 @@ watch(error, (newError: any) => {
 </script>
 
 <template>
-     <ul v-if="financialAccounts?.length" class="panel-list">
-          <li
-               v-for="account in financialAccounts"
-               :key="account.id"
-               class="panel-list-item"
-          >
-               <div>ID: {{ account.id }}</div>
-               <div>Name: {{ account.name }}</div>
-               <div>Created: {{ formatDate(account.createdAt) }}</div>
-          </li>
-     </ul>
-     <div v-else class="no-items">No accounts found.</div>
+     <div>
+          <h2>Financial Accounts</h2>
+          <ul v-if="financialAccounts?.length" class="panel-list">
+               <li
+                    v-for="account in financialAccounts"
+                    :key="account.id"
+                    class="panel-list-item"
+               >
+                    <h3>{{ account.name }}</h3>
+                    <div>ID: {{ account.id }}</div>
+                    <div>Value:</div>
+                    <div>Created: {{ formatDate(account.createdAt) }}</div>
+               </li>
+          </ul>
+          <div v-else class="no-items">No accounts found.</div>
+     </div>
 </template>

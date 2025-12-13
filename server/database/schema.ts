@@ -35,7 +35,7 @@ export const transactions = pgTable('Transactions', {
      userId: integer('user_id')
           .notNull()
           .references(() => users.id),
-     FinancialAccountId: integer('account_id')
+     financialAccountId: integer('account_id')
           .notNull()
           .references(() => FinancialAccounts.id),
      name: varchar('name', { length: 64 }).notNull(),
@@ -91,7 +91,7 @@ export const transactionsRelations = relations(transactions, ({ one }) => ({
           references: [users.id],
      }),
      account: one(FinancialAccounts, {
-          fields: [transactions.FinancialAccountId],
+          fields: [transactions.financialAccountId],
           references: [FinancialAccounts.id],
      }),
 }));
