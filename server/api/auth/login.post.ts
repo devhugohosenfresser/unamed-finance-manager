@@ -27,7 +27,7 @@ export default defineEventHandler(async (event) => {
                throw createError({
                     statusCode: 501,
                     statusMessage:
-                         'Login query broke, please try again later. Thank you for your understanding.',
+                         'The Server isnt currently responding. Thank you for your Understanding.',
                });
           }
      }
