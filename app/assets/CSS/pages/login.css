@@ -1,0 +1,175 @@
+/* Login Container */
+.login-container {
+     position: fixed;
+     top: 0;
+     left: 0;
+     right: 0;
+     bottom: 0;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     background-color: var(--body-bg);
+     padding: 20px;
+     margin: 0;
+     overflow: auto;
+     text-align: center;
+}
+
+/* Login Card */
+.login-card {
+     background-color: var(--widget-bg);
+     border-radius: 12px;
+     padding: 2.5rem;
+     width: 100%;
+     max-width: 400px;
+     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+     border: var(--widget-border);
+     margin: auto;
+     position: relative;
+}
+
+/* Typography */
+.login-title {
+     font-size: 1.75rem;
+     font-weight: 600;
+     margin-bottom: 0.5rem;
+     color: var(--font-color);
+     text-align: center;
+}
+
+.login-subtitle {
+     color: var(--font-color);
+     opacity: 0.8;
+     text-align: center;
+     margin-bottom: 2rem;
+     font-size: 0.95rem;
+}
+
+/* Form Elements */
+.login-form {
+     display: flex;
+     flex-direction: column;
+     gap: 1.5rem;
+     width: 100%;
+     margin: 0 auto;
+     max-width: 100%;
+}
+
+.form-group {
+     display: flex;
+     flex-direction: column;
+     gap: 0.5rem;
+     text-align: left;
+     max-width: 400px;
+     margin: 0 auto;
+     width: 100%;
+}
+
+.form-label {
+     font-size: 0.9rem;
+     font-weight: 500;
+     color: var(--font-color);
+     opacity: 0.9;
+}
+
+.form-label-container {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+}
+
+.form-input {
+     padding: 0.75rem 1rem;
+     border: var(--input-border);
+     border-radius: 6px;
+     background-color: var(--widget-bg);
+     color: var(--font-color);
+     font-size: 0.95rem;
+     transition: border-color 0.2s ease;
+     width: 100%;
+}
+
+.form-input:focus {
+     outline: none;
+     border-color: var(--link-color);
+}
+
+.form-input::placeholder {
+     color: color-mix(in srgb, var(--font-color) 50%, transparent);
+}
+
+/* Login Button */
+.login-button {
+     background-color: color-mix(in srgb, var(--link-color) 65%, #000);
+     color: white;
+     border: none;
+     padding: 0.75rem 1.5rem;
+     border-radius: 6px;
+     font-weight: 500;
+     font-size: 1rem;
+     cursor: pointer;
+     transition: all 0.2s ease;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     height: 46px;
+     width: 100%;
+     margin-top: 0.5rem;
+}
+
+.login-button:not(:disabled):hover {
+     opacity: 0.85;
+     transform: translateY(-1px);
+     background-color: color-mix(in srgb, var(--link-color) 70%, #000);
+}
+
+.login-button:disabled {
+     opacity: 0.7;
+     cursor: not-allowed;
+}
+
+.button-loader {
+     width: 20px;
+     height: 20px;
+     border: 2px solid rgba(255, 255, 255, 0.3);
+     border-radius: 50%;
+     border-top-color: white;
+     animation: spin 0.8s ease-in-out infinite;
+}
+
+/* Sign Up Link */
+.signup-link {
+     text-align: center;
+     margin-top: 1.5rem;
+     color: var(--font-color);
+     font-size: 0.95rem;
+     opacity: 0.9;
+     width: 100%;
+}
+
+.signup-button {
+     color: var(--link-color);
+     text-decoration: none;
+     font-weight: 500;
+     margin-left: 0.25rem;
+     transition: opacity 0.2s ease;
+}
+
+.signup-button:hover {
+     opacity: 0.8;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 480px) {
+     .login-card {
+          padding: 1.75rem 1.5rem;
+     }
+
+     .login-title {
+          font-size: 1.5rem;
+     }
+
+     .login-button {
+          padding: 0.75rem 1.25rem;
+     }
+}

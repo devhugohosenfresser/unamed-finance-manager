@@ -1,77 +1,77 @@
 <template>
-     <div
-          style="
-               max-width: 400px;
-               margin: 50px auto;
-               padding: 20px;
-               border: 1px solid #ccc;
-               border-radius: 8px;
-          "
-     >
-          <h1 style="text-align: center; margin-bottom: 20px">Register</h1>
+     <div class="register-container">
+          <div class="register-card">
+               <h1 class="register-title">Create an Account</h1>
+               <p class="register-subtitle">Join us to get started</p>
 
-          <form @submit.prevent="registerUser">
-               <div style="margin-bottom: 15px">
-                    <label>Username</label><br />
-                    <input
-                         v-model="username"
-                         type="text"
-                         required
-                         style="width: 100%; padding: 8px"
-                    />
-               </div>
+               <form @submit.prevent="registerUser" class="register-form">
+                    <div class="form-group">
+                         <label for="username" class="form-label"
+                              >Username</label
+                         >
+                         <input
+                              id="username"
+                              v-model="username"
+                              type="text"
+                              class="form-input"
+                              placeholder="Choose a username"
+                              required
+                         />
+                    </div>
 
-               <div style="margin-bottom: 15px">
-                    <label>Email</label><br />
-                    <input
-                         v-model="email"
-                         type="email"
-                         required
-                         style="width: 100%; padding: 8px"
-                    />
-               </div>
+                    <div class="form-group">
+                         <label for="email" class="form-label">Email</label>
+                         <input
+                              id="email"
+                              v-model="email"
+                              type="email"
+                              class="form-input"
+                              placeholder="Enter your email"
+                              required
+                         />
+                    </div>
 
-               <div style="margin-bottom: 15px">
-                    <label>Password</label><br />
-                    <input
-                         v-model="password"
-                         type="password"
-                         required
-                         style="width: 100%; padding: 8px"
-                    />
-               </div>
+                    <div class="form-group">
+                         <label for="password" class="form-label"
+                              >Password</label
+                         >
+                         <input
+                              id="password"
+                              v-model="password"
+                              type="password"
+                              class="form-input"
+                              placeholder="Create a password"
+                              required
+                         />
+                    </div>
 
-               <button
-                    type="submit"
-                    :disabled="loading"
-                    style="
-                         width: 100%;
-                         padding: 10px;
-                         background-color: #28a745;
-                         color: white;
-                         border: none;
-                         border-radius: 4px;
-                         cursor: pointer;
-                    "
-               >
-                    {{ loading ? 'Registering...' : 'Register' }}
-               </button>
+                    <button
+                         type="submit"
+                         class="register-button"
+                         :disabled="loading"
+                    >
+                         <span>{{
+                              loading ? 'Creating Account...' : 'Sign Up'
+                         }}</span>
+                    </button>
 
-               <p v-if="error" style="color: red; margin-top: 10px">
-                    {{ error }}
+                    <p v-if="error" class="error-message">
+                         {{ error }}
+                    </p>
+                    <p v-if="success" class="success-message">
+                         {{ success }}
+                    </p>
+               </form>
+
+               <p class="login-link">
+                    Already have an account?
+                    <a href="/auth/login" class="login-button">Sign in</a>
                </p>
-               <p v-if="success" style="color: green; margin-top: 10px">
-                    {{ success }}
-               </p>
-          </form>
+          </div>
      </div>
 </template>
 
-<style>
-* {
-     color: black;
-}
-</style>
+<style src="@/assets/CSS/pages/register.css" scoped></style>
 
 <script setup lang="ts">
 import { ref } from 'vue';

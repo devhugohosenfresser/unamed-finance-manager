@@ -5,7 +5,6 @@
                <div class="PageWrapper">
                     <slot />
                </div>
-               <Footer />
           </div>
      </div>
 </template>

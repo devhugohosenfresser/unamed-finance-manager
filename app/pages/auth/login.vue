@@ -1,61 +1,65 @@
 <template>
-     <div
-          style="
-               max-width: 400px;
-               margin: 50px auto;
-               padding: 20px;
-               border: 1px solid #ccc;
-               border-radius: 8px;
-          "
-     >
-          <h1 style="text-align: center; margin-bottom: 20px">Login</h1>
-
-          <form @submit.prevent="loginUser">
-               <div style="margin-bottom: 15px">
-                    <label>Email</label><br />
-                    <input
-                         v-model="email"
-                         type="email"
-                         required
-                         style="width: 100%; padding: 8px"
-                    />
-               </div>
-
-               <div style="margin-bottom: 15px">
-                    <label>Password</label><br />
-                    <input
-                         v-model="password"
-                         type="password"
-                         required
-                         style="width: 100%; padding: 8px"
-                    />
-               </div>
-
-               <button
-                    type="submit"
-                    :disabled="loading"
-                    style="
-                         width: 100%;
-                         padding: 10px;
-                         background-color: #007bff;
-                         color: white;
-                         border: none;
-                         border-radius: 4px;
-                         cursor: pointer;
-                    "
-               >
-                    {{ loading ? 'Logging in...' : 'Login' }}
-               </button>
-
-               <p v-if="error" style="color: red; margin-top: 10px">
-                    {{ error }}
+     <div class="login-container">
+          <div class="login-card">
+               <h1 class="login-title">Welcome Back</h1>
+               <p class="login-subtitle">
+                    Please enter your credentials to continue
                </p>
-               <p v-if="success" style="color: green; margin-top: 10px">
-                    {{ success }}
+
+               <form @submit.prevent="loginUser" class="login-form">
+                    <div class="form-group">
+                         <label for="email" class="form-label"
+                              >Email Address</label
+                         >
+                         <input
+                              id="email"
+                              v-model="email"
+                              type="email"
+                              class="form-input"
+                              placeholder="Enter your email"
+                              required
+                         />
+                    </div>
+
+                    <div class="form-group">
+                         <label for="password" class="form-label"
+                              >Password</label
+                         >
+                         <input
+                              id="password"
+                              v-model="password"
+                              type="password"
+                              class="form-input"
+                              placeholder="Enter your password"
+                              required
+                         />
+                    </div>
+
+                    <button
+                         type="submit"
+                         class="login-button"
+                         :disabled="loading"
+                    >
+                         <span>Sign In</span>
+                    </button>
+
+                    <p v-if="error" class="error-message">
+                         {{ error }}
+                    </p>
+                    <p v-if="success" class="success-message">
+                         {{ success }}
+                    </p>
+               </form>
+
+               <p class="signup-link">
+                    Don't have an account?
+                    <a href="/auth/register" class="signup-button">Sign up</a>
                </p>
-          </form>
+          </div>
      </div>
 </template>
+
+<style src="@/assets/CSS/pages/login.css" scoped></style>
 
 <script setup lang="ts">
 import { ref } from 'vue';
